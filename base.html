@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Plate Recognition System - Professional Control Center</title>
+    
+    <!-- Professional UI Framework -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Professional Law Enforcement Color Scheme */
+            --primary-dark: #1a1d23;
+            --secondary-dark: #2c3340;
+            --accent-blue: #2563eb;
+            --accent-green: #059669;
+            --accent-orange: #ea580c;
+            --accent-red: #dc2626;
+            --text-light: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #374151;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --control-bg: #374151;
+            --panel-bg: #1f2937;
+            --monitor-green: #00ff41;
+            --monitor-amber: #ffbf00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Control System Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25px 25px, rgba(255,255,255,0.02) 2px, transparent 0),
+                radial-gradient(circle at 75px 75px, rgba(255,255,255,0.01) 1px, transparent 0);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header System */
+        .system-header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 3px solid var(--accent-blue);
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .system-title {
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .system-badge {
+            background: var(--accent-blue);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            margin-left: 1rem;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        /* Control Panels */
+        .control-panel {
+            background: linear-gradient(145deg, var(--panel-bg), var(--secondary-dark));
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .control-panel h3 {
+            font-family: 'Source Code Pro', monospace;
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Professional Buttons */
+        .btn-control {
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin: 0.25rem;
+        }
+
+        .btn-control::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-control:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary-control {
+            background: linear-gradient(135deg, var(--accent-blue), #1d4ed8);
+            color: white;
+            border: 1px solid rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-success-control {
+            background: linear-gradient(135deg, var(--success-color), #059669);
+            color: white;
+            border: 1px solid rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-warning-control {
+            background: linear-gradient(135deg, var(--warning-color), #d97706);
+            color: white;
+            border: 1px solid rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-danger-control {
+            background: linear-gradient(135deg, var(--danger-color), #b91c1c);
+            color: white;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+
+        /* Monitor Displays */
+        .monitor-display {
+            background: #000;
+            border: 3px solid var(--control-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Source Code Pro', monospace;
+            min-height: 300px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+
+        .monitor-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 65, 0.03) 2px,
+                rgba(0, 255, 65, 0.03) 4px
+            );
+            pointer-events: none;
+        }
+
+        .monitor-text {
+            color: var(--monitor-green);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        .video-preview {
+            background: #000;
+            border: 2px solid var(--control-bg);
+            border-radius: 8px;
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            position: relative;
+        }
+
+        .status-indicator::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            background: currentColor;
+            opacity: 0.3;
+            animation: pulse-glow 2s infinite;
+        }
+
+        .status-active {
+            background-color: var(--success-color);
+            color: var(--success-color);
+            box-shadow: 0 0 8px var(--success-color);
+        }
+
+        .status-inactive {
+            background-color: var(--text-secondary);
+            color: var(--text-secondary);
+        }
+
+        .status-warning {
+            background-color: var(--warning-color);
+            color: var(--warning-color);
+            box-shadow: 0 0 8px var(--warning-color);
+        }
+
+        .status-alert {
+            background-color: var(--danger-color);
+            color: var(--danger-color);
+            box-shadow: 0 0 8px var(--danger-color);
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.1; }
+        }
+
+        /* Progress Bars */
+        .progress-control {
+            height: 8px;
+            background: var(--control-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-bar-control {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .progress-bar-control::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progress-shine 2s infinite;
+        }
+
+        @keyframes progress-shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Statistics Cards */
+        .stat-card {
+            background: linear-gradient(135deg, var(--panel-bg), var(--control-bg));
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-value {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        /* Data Tables */
+        .data-table {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .data-table table {
+            width: 100%;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .data-table th {
+            background: var(--control-bg);
+            color: var(--accent-blue);
+            padding: 1rem;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        .data-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-light);
+        }
+
+        .data-table tr:hover {
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Form Controls */
+        .form-control-custom {
+            background: var(--control-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            border-radius: 4px;
+            padding: 0.75rem;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .form-control-custom:focus {
+            background: var(--panel-bg);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+            color: var(--text-light);
+        }
+
+        .form-control-custom::placeholder {
+            color: var(--text-secondary);
+        }
+
+        /* Alert System */
+        .alert-control {
+            border: none;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            border-left: 4px solid var(--success-color);
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+            border-left: 4px solid var(--danger-color);
+            animation: alert-pulse 1s infinite alternate;
+        }
+
+        @keyframes alert-pulse {
+            from { box-shadow: 0 0 5px rgba(239, 68, 68, 0.5); }
+            to { box-shadow: 0 0 20px rgba(239, 68, 68, 0.8); }
+        }
+
+        /* Navigation Tabs */
+        .nav-control {
+            background: var(--control-bg);
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-control .nav-link {
+            background: transparent;
+            color: var(--text-secondary);
+            border: none;
+            border-radius: 4px;
+            padding: 0.75rem 1.5rem;
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-control .nav-link:hover {
+            background: rgba(37, 99, 235, 0.2);
+            color: var(--accent-blue);
+        }
+
+        .nav-control .nav-link.active {
+            background: var(--accent-blue);
+            color: white;
+            box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        /* File Upload Area */
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: var(--panel-bg);
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent-blue);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .upload-area.dragover {
+            border-color: var(--success-color);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .system-title {
+                font-size: 1.2rem;
+            }
+            
+            .control-panel {
+                padding: 1rem;
+            }
+            
+            .btn-control {
+                width: 100%;
+                margin: 0.25rem 0;
+            }
+            
+            .stat-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner-control {
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--accent-blue);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- System Header -->
+    <header class="system-header">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="system-title mb-0">
+                        <i class="fas fa-shield-alt me-3"></i>
+                        License Plate Recognition System
+                        <span class="system-badge">PROFESSIONAL v2.0</span>
+                    </h1>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="d-inline-flex align-items-center">
+                        <span class="status-indicator status-active"></span>
+                        <span class="me-3">System Status: <strong id="system-status">READY</strong></span>
+                        <span class="text-muted" id="current-time"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container-fluid py-4">
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-control" id="main-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#processing-tab">
+                    <i class="fas fa-play-circle me-2"></i>Processing
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#search-tab">
+                    <i class="fas fa-search me-2"></i>Search & Analysis
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#results-tab">
+                    <i class="fas fa-chart-bar me-2"></i>Results
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#settings-tab">
+                    <i class="fas fa-cog me-2"></i>Settings
+                </a>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Processing Tab -->
+            <div class="tab-pane fade show active" id="processing-tab">
+                <div class="row">
+                    <!-- Left Control Panel -->
+                    <div class="col-xl-4">
+                        <!-- Video Upload -->
+                        <div class="control-panel">
+                            <h3><i class="fas fa-upload me-2"></i>Video Source</h3>
+                            <div class="upload-area" id="upload-area">
+                                <i class="fas fa-cloud-upload-alt fa-3x mb-3 text-muted"></i>
+                                <h5>Drop video file here or click to browse</h5>
+                                <p class="text-muted">Supported formats: MP4, AVI, MOV, MKV</p>
+                                <input type="file" id="video-file" class="d-none" accept="video/*">
+                                <button class="btn btn-primary-control" onclick="document.getElementById('video-file').click()">
+                                    <i class="fas fa-folder-open me-2"></i>Select Video File
+                                </button>
+                            </div>
+                            <div id="video-info" class="mt-3 d-none">
+                                <div class="alert alert-success">
+                                    <strong>Video Loaded:</strong> <span id="video-name"></span><br>
+                                    <strong>Duration:</strong> <span id="video-duration"></span><br>
+                                    <strong>FPS:</strong> <span id="video-fps"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Processing Controls -->
+                        <div class="control-panel">
+                            <h3><i class="fas fa-play me-2"></i>Processing Controls</h3>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-success-control" id="start-btn" onclick="startProcessing()">
+                                    <i class="fas fa-play me-2"></i>Start Processing
+                                </button>
+                                <button class="btn btn-danger-control" id="stop-btn" onclick="stopProcessing()" disabled>
+                                    <i class="fas fa-stop me-2"></i>Stop Processing
+                                </button>
+                                <button class="btn btn-warning-control" id="export-btn" onclick="exportResults()" disabled>
+                                    <i class="fas fa-download me-2"></i>Export Results
+                                </button>
+                            </div>
+                            
+                            <!-- Progress Bar -->
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="text-muted">Processing Progress</span>
+                                    <span class="text-muted" id="progress-text">0%</span>
+                                </div>
+                                <div class="progress-control">
+                                    <div class="progress-bar-control" id="progress-bar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Statistics -->
+                        <div class="control-panel">
+                            <h3><i class="fas fa-chart-line me-2"></i>Live Statistics</h3>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="stat-card">
+                                        <span class="stat-value" id="frames-processed">0</span>
+                                        <div class="stat-label">Frames</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-card">
+                                        <span class="stat-value" id="plates-detected">0</span>
+                                        <div class="stat-label">Plates</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-card">
+                                        <span class="stat-value" id="unique-plates">0</span>
+                                        <div class="stat-label">Unique</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-card">
+                                        <span class="stat-value" id="processing-fps">0.0</span>
+                                        <div class="stat-label">FPS</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Monitor Panel -->
+                    <div class="col-xl-8">
+                        <div class="control-panel">
+                            <h3><i class="fas fa-tv me-2"></i>Live Monitor</h3>
+                            <div class="text-center">
+                                <img id="video-preview" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQwIiBoZWlnaHQ9IjQ4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMDAwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiMwMGZmNDEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5OTyBWSURFTyBMT0FERUQgLSBTRUxFQ1QgVklERU8gRklMRTwvdGV4dD48L3N2Zz4=" class="video-preview" alt="Video Preview">
+                            </div>
+                            
+                            <!-- Alert System -->
+                            <div id="alert-container" class="mt-3"></div>
+                        </div>
+
+                        <!-- System Log -->
+                        <div class="control-panel">
+                            <h3><i class="fas fa-terminal me-2"></i>System Log</h3>
+                            <div class="monitor-display">
+                                <div class="monitor-text" id="system-log">
+                                    [SYSTEM READY] License Plate Recognition System v2.0 Initialized<br>
+                                    [INFO] Professional Control Interface Loaded<br>
+                                    [INFO] Awaiting video input for processing...<br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Tab -->
+            <div class="tab-pane fade" id="search-tab">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="control-panel">
+                            <h3><i class="fas fa-search me-2"></i>Search Controls</h3>
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Target License Plate</label>
+                                <input type="text" class="form-control form-control-custom" id="search-plate" placeholder="Enter license plate...">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Similarity Threshold</label>
+                                <input type="range" class="form-range" id="similarity-threshold" min="50" max="100" value="80">
+                                <small class="text-muted">Current: <span id="threshold-value">80%</span></small>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary-control" onclick="searchPlate()">
+                                    <i class="fas fa-search me-2"></i>Search Plate
+                                </button>
+                                <button class="btn btn-warning-control" onclick="showAllPlates()">
+                                    <i class="fas fa-list me-2"></i>Show All Plates
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8">
+                        <div class="control-panel">
+                            <h3><i class="fas fa-table me-2"></i>Search Results</h3>
+                            <div class="data-table">
+                                <table class="table table-dark table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Plate</th>
+                                            <th>Vehicle</th>
+                                            <th>Color</th>
+                                            <th>First Seen</th>
+                                            <th>Last Seen</th>
+                                            <th>Detections</th>
+                                            <th>Confidence</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="search-results">
+                                        <tr>
+                                            <td colspan="8" class="text-center text-muted">No search results available</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Tab -->
+            <div class="tab-pane fade" id="results-tab">
+                <div class="control-panel">
+                    <h3><i class="fas fa-chart-bar me-2"></i>Processing Results</h3>
+                    <div class="monitor-display" style="min-height: 500px;">
+                        <div class="monitor-text" id="results-display">
+                            [INFO] No processing results available<br>
+                            [INFO] Complete video processing to view detailed results<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-pane fade" id="settings-tab">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="control-panel">
+                            <h3><i class="fas fa-cog me-2"></i>Detection Settings</h3>
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Detection Confidence</label>
+                                <input type="range" class="form-range" id="detection-confidence" min="10" max="90" value="50">
+                                <small class="text-muted">Current: <span id="confidence-value">50%</span></small>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="tracking-enabled" checked>
+                                <label class="form-check-label text-muted">Enable Vehicle Tracking</label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="color-detection" checked>
+                                <label class="form-check-label text-muted">Enable Color Detection</label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="vehicle-type-detection" checked>
+                                <label class="form-check-label text-muted">Enable Vehicle Type Detection</label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="speed-monitoring" checked>
+                                <label class="form-check-label text-muted">Enable Speed Monitoring</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="control-panel">
+                            <h3><i class="fas fa-database me-2"></i>System Configuration</h3>
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Output Directory</label>
+                                <input type="text" class="form-control form-control-custom" id="output-directory" value="./output" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label text-muted">Processing Quality</label>
+                                <select class="form-control form-control-custom" id="processing-quality">
+                                    <option value="high">High Quality (Slower)</option>
+                                    <option value="medium" selected>Medium Quality (Balanced)</option>
+                                    <option value="fast">Fast Processing (Lower Accuracy)</option>
+                                </select>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-success-control" onclick="saveSettings()">
+                                    <i class="fas fa-save me-2"></i>Save Settings
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="control-panel">
+                            <h3><i class="fas fa-info-circle me-2"></i>System Information</h3>
+                            <div class="data-table">
+                                <table class="table table-dark table-borderless mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-muted">System Version</td>
+                                            <td>Professional v2.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-muted">AI Models Status</td>
+                                            <td><span class="status-indicator status-active"></span>Loaded</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-muted">OCR Engine</td>
+                                            <td><span class="status-indicator status-active"></span>EasyOCR</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-muted">Vehicle Detection</td>
+                                            <td><span class="status-indicator status-active"></span>YOLOv8</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-muted">Tracking System</td>
+                                            <td><span class="status-indicator status-active"></span>SORT</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    
+    <script>
+        // Professional Control System JavaScript
+        class LPRControlSystem {
+            constructor() {
+                this.socket = io();
+                this.isProcessing = false;
+                this.currentVideoFile = null;
+                this.statistics = {
+                    framesProcessed: 0,
+                    platesDetected: 0,
+                    uniquePlates: 0,
+                    processingFPS: 0
+                };
+                
+                this.initializeSystem();
+                this.setupEventHandlers();
+                this.updateSystemTime();
+            }
+            
+            initializeSystem() {
+                this.log('[SYSTEM] Professional Control Interface Initialized');
+                this.log('[INFO] Awaiting operator commands...');
+                
+                // Setup socket events
+                this.socket.on('connected', (data) => {
+                    this.log('[NETWORK] Connection established with processing server');
+                    this.updateSystemStatus('ONLINE');
+                });
+                
+                this.socket.on('processing_update', (data) => {
+                    this.updateStatistics(data.statistics);
+                    if (data.frame_preview) {
+                        this.updateVideoPreview(data.frame_preview);
+                    }
+                });
+                
+                this.socket.on('processing_complete', (data) => {
+                    this.log(`[COMPLETE] Processing finished - ${data.total_plates} total detections`);
+                    this.processingComplete();
+                });
+                
+                this.socket.on('stolen_vehicle_alert', (data) => {
+                    this.showStolenVehicleAlert(data);
+                });
+                
+                this.socket.on('processing_error', (data) => {
+                    this.log(`[ERROR] ${data.error}`);
+                    this.showAlert('Processing Error: ' + data.error, 'danger');
+                });
+            }
+            
+            setupEventHandlers() {
+                // File upload handling
+                const fileInput = document.getElementById('video-file');
+                const uploadArea = document.getElementById('upload-area');
+                
+                fileInput.addEventListener('change', (e) => this.handleVideoUpload(e));
+                
+                // Drag and drop
+                uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.add('dragover');
+                });
+                
+                uploadArea.addEventListener('dragleave', () => {
+                    uploadArea.classList.remove('dragover');
+                });
+                
+                uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        fileInput.files = files;
+                        this.handleVideoUpload({ target: fileInput });
+                    }
+                });
+                
+                // Settings sliders
+                const confidenceSlider = document.getElementById('detection-confidence');
+                confidenceSlider.addEventListener('input', (e) => {
+                    document.getElementById('confidence-value').textContent = e.target.value + '%';
+                });
+                
+                const thresholdSlider = document.getElementById('similarity-threshold');
+                thresholdSlider.addEventListener('input', (e) => {
+                    document.getElementById('threshold-value').textContent = e.target.value + '%';
+                });
+            }
+            
+            handleVideoUpload(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                
+                this.log(`[UPLOAD] Processing video file: ${file.name}`);
+                this.currentVideoFile = file;
+                
+                const formData = new FormData();
+                formData.append('video', file);
+                
+                fetch('/upload_video', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        this.showVideoInfo(data);
+                        this.log(`[SUCCESS] Video loaded - FPS: ${data.fps}, Frames: ${data.total_frames}`);
+                        document.getElementById('start-btn').disabled = false;
+                    } else {
+                        this.log(`[ERROR] Upload failed: ${data.error}`);
+                        this.showAlert('Upload failed: ' + data.error, 'danger');
+                    }
+                })
+                .catch(error => {
+                    this.log(`[ERROR] Upload error: ${error}`);
+                    this.showAlert('Upload error: ' + error, 'danger');
+                });
+            }
+            
+            showVideoInfo(data) {
+                document.getElementById('video-name').textContent = data.filename;
+                document.getElementById('video-fps').textContent = data.fps.toFixed(2);
+                
+                const duration = data.total_frames / data.fps;
+                const minutes = Math.floor(duration / 60);
+                const seconds = Math.floor(duration % 60);
+                document.getElementById('video-duration').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                document.getElementById('video-info').classList.remove('d-none');
+            }
+            
+            startProcessing() {
+                if (!this.currentVideoFile) {
+                    this.showAlert('Please select a video file first', 'warning');
+                    return;
+                }
+                
+                this.log('[PROCESSING] Initiating video analysis...');
+                this.isProcessing = true;
+                
+                document.getElementById('start-btn').disabled = true;
+                document.getElementById('stop-btn').disabled = false;
+                this.updateSystemStatus('PROCESSING');
+                
+                fetch('/start_processing', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        this.log('[INFO] Processing pipeline activated');
+                    } else {
+                        this.log(`[ERROR] ${data.error}`);
+                        this.processingComplete();
+                    }
+                })
+                .catch(error => {
+                    this.log(`[ERROR] Processing start failed: ${error}`);
+                    this.processingComplete();
+                });
+            }
+            
+            stopProcessing() {
+                this.log('[STOP] Terminating processing operation...');
+                
+                fetch('/stop_processing', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    this.log('[INFO] Processing stopped by operator');
+                    this.processingComplete();
+                });
+            }
+            
+            processingComplete() {
+                this.isProcessing = false;
+                document.getElementById('start-btn').disabled = false;
+                document.getElementById('stop-btn').disabled = true;
+                document.getElementById('export-btn').disabled = false;
+                this.updateSystemStatus('READY');
+                
+                this.showAlert('Processing completed successfully', 'success');
+            }
+            
+            exportResults() {
+                this.log('[EXPORT] Generating results package...');
+                window.open('/download_results', '_blank');
+            }
+            
+            searchPlate() {
+                const plate = document.getElementById('search-plate').value.trim();
+                const threshold = document.getElementById('similarity-threshold').value;
+                
+                if (!plate) {
+                    this.showAlert('Please enter a license plate to search', 'warning');
+                    return;
+                }
+                
+                this.log(`[SEARCH] Searching for license plate: ${plate}`);
+                
+                fetch('/search_plate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ plate: plate, threshold: threshold / 100 })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.results) {
+                        this.displaySearchResults(data.results);
+                        this.log(`[RESULTS] Found ${data.total_found} matching records`);
+                    } else {
+                        this.log(`[ERROR] Search failed: ${data.error}`);
+                    }
+                });
+            }
+            
+            showAllPlates() {
+                this.log('[QUERY] Retrieving all detected license plates...');
+                // Implementation for showing all plates
+                this.searchPlate(); // Temporary - would need separate endpoint
+            }
+            
+            displaySearchResults(results) {
+                const tbody = document.getElementById('search-results');
+                tbody.innerHTML = '';
+                
+                if (results.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">No results found</td></tr>';
+                    return;
+                }
+                
+                results.forEach(result => {
+                    const row = document.createElement('tr');
+                    const timestamp = new Date(result.timestamp * 1000);
+                    
+                    row.innerHTML = `
+                        <td><strong>${result.plate}</strong></td>
+                        <td>${result.vehicle_type}</td>
+                        <td>${result.vehicle_color}</td>
+                        <td>${timestamp.toLocaleTimeString()}</td>
+                        <td>${timestamp.toLocaleTimeString()}</td>
+                        <td>1</td>
+                        <td>${(result.confidence * 100).toFixed(1)}%</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary-control" onclick="viewDetails(${result.frame})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+            
+            updateStatistics(stats) {
+                document.getElementById('frames-processed').textContent = stats.frames_processed;
+                document.getElementById('plates-detected').textContent = stats.plates_detected;
+                document.getElementById('unique-plates').textContent = stats.unique_plates;
+                document.getElementById('processing-fps').textContent = stats.processing_fps;
+                
+                // Update progress
+                document.getElementById('progress-bar').style.width = stats.progress + '%';
+                document.getElementById('progress-text').textContent = stats.progress.toFixed(1) + '%';
+            }
+            
+            updateVideoPreview(base64Image) {
+                document.getElementById('video-preview').src = 'data:image/jpeg;base64,' + base64Image;
+            }
+            
+            showStolenVehicleAlert(data) {
+                const alert = `
+                    <div class="alert alert-danger alert-control">
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i>STOLEN VEHICLE DETECTED</h5>
+                        <strong>License Plate:</strong> ${data.license_plate}<br>
+                        <strong>Case Number:</strong> ${data.case_number}<br>
+                        <strong>Priority:</strong> ${data.priority}<br>
+                        <strong>Reporting Agency:</strong> ${data.agency}<br>
+                        <strong>Detection Time:</strong> ${new Date().toLocaleString()}
+                    </div>
+                `;
+                document.getElementById('alert-container').innerHTML = alert;
+                
+                this.log(`[ALERT] STOLEN VEHICLE DETECTED - ${data.license_plate}`);
+                
+                // Audio alert (optional)
+                if (typeof Audio !== 'undefined') {
+                    const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvGEeByKY3u/FdSMELYPM9duJOQgZYrXp4olMDAVVq+Tv52QcBzjt78t5KgQse8js3o5AAAAa');
+                    audio.play().catch(() => {}); // Silent fail if audio not supported
+                }
+            }
+            
+            showAlert(message, type) {
+                const alertClass = type === 'success' ? 'alert-success' : 
+                                type === 'warning' ? 'alert-warning' : 'alert-danger';
+                
+                const alert = `
+                    <div class="alert ${alertClass} alert-control">
+                        ${message}
+                    </div>
+                `;
+                document.getElementById('alert-container').innerHTML = alert;
+                
+                // Auto-dismiss after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('alert-container').innerHTML = '';
+                }, 5000);
+            }
+            
+            updateSystemStatus(status) {
+                document.getElementById('system-status').textContent = status;
+                const indicator = document.querySelector('.status-indicator');
+                indicator.className = 'status-indicator ' + 
+                    (status === 'ONLINE' || status === 'READY' ? 'status-active' : 
+                     status === 'PROCESSING' ? 'status-warning' : 'status-inactive');
+            }
+            
+            updateSystemTime() {
+                const now = new Date();
+                document.getElementById('current-time').textContent = now.toLocaleString();
+                setTimeout(() => this.updateSystemTime(), 1000);
+            }
+            
+            log(message) {
+                const logElement = document.getElementById('system-log');
+                const timestamp = new Date().toLocaleTimeString();
+                logElement.innerHTML += `[${timestamp}] ${message}<br>`;
+                logElement.scrollTop = logElement.scrollHeight;
+                
+                // Keep last 50 lines only
+                const lines = logElement.innerHTML.split('<br>');
+                if (lines.length > 50) {
+                    logElement.innerHTML = lines.slice(-50).join('<br>');
+                }
+            }
+            
+            saveSettings() {
+                const settings = {
+                    detectionConfidence: document.getElementById('detection-confidence').value,
+                    trackingEnabled: document.getElementById('tracking-enabled').checked,
+                    colorDetection: document.getElementById('color-detection').checked,
+                    vehicleTypeDetection: document.getElementById('vehicle-type-detection').checked,
+                    speedMonitoring: document.getElementById('speed-monitoring').checked,
+                    processingQuality: document.getElementById('processing-quality').value
+                };
+                
+                this.log('[SETTINGS] Configuration updated');
+                this.showAlert('Settings saved successfully', 'success');
+            }
+        }
+        
+        // Global functions for button handlers
+        let lprSystem;
+        
+        function startProcessing() { lprSystem.startProcessing(); }
+        function stopProcessing() { lprSystem.stopProcessing(); }
+        function exportResults() { lprSystem.exportResults(); }
+        function searchPlate() { lprSystem.searchPlate(); }
+        function showAllPlates() { lprSystem.showAllPlates(); }
+        function saveSettings() { lprSystem.saveSettings(); }
+        
+        function viewDetails(frameNumber) {
+            lprSystem.log(`[VIEW] Displaying details for frame ${frameNumber}`);
+        }
+        
+        // Initialize system when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            lprSystem = new LPRControlSystem();
+        });
+    </script>
+</body>
+</html>

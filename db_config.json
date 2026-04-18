@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "user": "root",
+  "password": "godgrace",
+  "database": "vehicle_theft_db"
+}

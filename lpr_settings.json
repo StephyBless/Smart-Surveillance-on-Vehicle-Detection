@@ -1,0 +1,7 @@
+{
+  "detection_confidence": 0.5618784530386741,
+  "tracking_enabled": false,
+  "interpolation_enabled": true,
+  "save_screenshots": false,
+  "output_directory": "./output"
+}

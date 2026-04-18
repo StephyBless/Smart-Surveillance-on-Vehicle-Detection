@@ -1,0 +1,38 @@
+{
+  "cameras": {
+    "CAM001": {
+      "camera_id": "CAM001",
+      "name": "MAIN GATE",
+      "location": "BUILDING ENTRANCE",
+      "coordinates": [
+        0.0,
+        0.0
+      ],
+      "video_source": "C:/Users/steph/Documents/project_veh/sample.mp4",
+      "is_active": false
+    },
+    "CAM002": {
+      "camera_id": "CAM002",
+      "name": "Parking Lot",
+      "location": "North Area",
+      "coordinates": [
+        100,
+        50
+      ],
+      "video_source": null,
+      "is_active": false
+    },
+    "CAM003": {
+      "camera_id": "CAM003",
+      "name": "Exit Gate",
+      "location": "Exit Area",
+      "coordinates": [
+        200,
+        0
+      ],
+      "video_source": null,
+      "is_active": false
+    }
+  },
+  "last_updated": "2025-10-11T14:34:32.280435"
+}

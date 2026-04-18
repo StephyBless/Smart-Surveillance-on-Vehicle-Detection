@@ -1,0 +1,9 @@
+{
+  "detection_confidence": 0.5823204419889503,
+  "tracking_enabled": true,
+  "interpolation_enabled": true,
+  "save_screenshots": true,
+  "output_directory": "./output",
+  "color_detection_enabled": true,
+  "vehicle_type_detection": true
+}
