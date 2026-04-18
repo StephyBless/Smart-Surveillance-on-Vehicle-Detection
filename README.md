@@ -1,55 +1,109 @@
-# Automatic-Number-Plate-Recognition-YOLOv8
-## Demo
+# 🚗 Smart Surveillance System for Vehicle Detection
+
+## 📌 Overview
+
+The **Smart Surveillance System for Vehicle Detection** is an intelligent monitoring solution designed to automatically detect and track vehicles using computer vision and machine learning techniques.
+This system enhances traffic monitoring, security surveillance, and data-driven decision-making.
+
+---
+
+## 🎯 Objectives
+
+* Detect vehicles in real-time using video streams or images
+* Improve surveillance efficiency with automation
+* Reduce manual monitoring efforts
+* Provide accurate and fast detection results
+
+---
+
+## 🧠 Features
+
+* 🚘 Real-time vehicle detection
+* 🎥 Video and image input support
+* 📊 Bounding box visualization around detected vehicles
+* ⚡ Fast processing using optimized models
+* 🔍 Scalable for traffic analysis and smart city applications
+
+---
+
+## 🛠️ Tech Stack
+
+* **Programming Language:** Python
+* **Libraries/Frameworks:**
+
+  * OpenCV
+  * NumPy
+  * TensorFlow / PyTorch (if used)
+* **Tools:**
+
+  * VS Code / Jupyter Notebook
+  * Git & GitHub
+
+---
+
+## ⚙️ How It Works
+
+1. Capture video stream or load input image
+2. Preprocess frames for better accuracy
+3. Apply trained detection model
+4. Identify vehicles in the frame
+5. Draw bounding boxes and display results
+
+---
 
 
-https://github.com/Muhammad-Zeerak-Khan/Automatic-License-Plate-Recognition-using-YOLOv8/assets/79400407/1af57131-3ada-470a-b798-95fff00254e6
+## ▶️ Installation & Setup
 
-
-
-## Data
-
-The video used in the tutorial can be downloaded [here](https://drive.google.com/file/d/1JbwLyqpFCXmftaJY1oap8Sa6KfjoWJta/view?usp=sharing).
-
-## Model
-
-A Yolov8 pre-trained model (YOLOv8n) was used to detect vehicles.
-
-A licensed plate detector was used to detect license plates. The model was trained with Yolov8 using [this dataset](https://universe.roboflow.com/roboflow-universe-projects/license-plate-recognition-rxg4e/dataset/4). 
-- The model is available [here](https://drive.google.com/file/d/1Zmf5ynaTFhmln2z7Qvv-tgjkWQYQ9Zdw/view?usp=sharing).
-
-## Dependencies
-
-The sort module needs to be downloaded from [this repository](https://github.com/abewley/sort).
+1. Clone the repository
 
 ```bash
-git clone https://github.com/abewley/sort
+git clone https://github.com/your-username/smart-surveillance.git
+cd smart-surveillance
 ```
 
-## Project Setup
+2. Install dependencies
 
-* Make an environment with python=3.10 using the following command 
-``` bash
-conda create --prefix ./env python==3.10 -y
-```
-* Activate the environment
-``` bash
-source activate ./env
-``` 
-
-* Install the project dependencies using the following command 
 ```bash
 pip install -r requirements.txt
 ```
-* Run main.py with the sample video file to generate the test.csv file 
-``` python
-python main.py
-```
-* Run the add_missing_data.py file for interpolation of values to match up for the missing frames and smooth output.
-```python
-python add_missing_data.py
+
+3. Run the project
+
+```bash
+python detection.py
 ```
 
-* Finally run the visualize.py passing in the interpolated csv files and hence obtaining a smooth output for license plate detection.
-```python
-python visualize.py
-```
+---
+
+## 📊 Results
+
+* Accurate detection of vehicles in different environments
+* Works on both images and live video feeds
+* Real-time performance with optimized processing
+
+---
+
+## 🚀 Future Enhancements
+
+* 🚦 Traffic density analysis
+* 📸 License plate recognition
+* ☁️ Cloud integration for remote monitoring
+* 📱 Mobile app integration
+* 🔔 Alert system for suspicious activity
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Feel free to fork this repository and submit a pull request.
+
+---
+
+
+## 👨‍💻 Author
+
+**Stephy Bless**
+Technologist | Future Techie 🚀
+
+---
