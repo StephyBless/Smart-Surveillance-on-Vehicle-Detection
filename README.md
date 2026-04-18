@@ -5,6 +5,9 @@
 The **Smart Surveillance System for Vehicle Detection** is an intelligent monitoring solution designed to automatically detect and track vehicles using computer vision and machine learning techniques.
 This system enhances traffic monitoring, security surveillance, and data-driven decision-making.
 
+<img width="425" height="265" alt="image" src="https://github.com/user-attachments/assets/b8500d19-e3eb-4fff-a4af-b9f8a20ee7f6" />
+
+
 ---
 
 ## 🎯 Objectives
@@ -13,6 +16,8 @@ This system enhances traffic monitoring, security surveillance, and data-driven 
 * Improve surveillance efficiency with automation
 * Reduce manual monitoring efforts
 * Provide accurate and fast detection results
+
+<img width="417" height="323" alt="image" src="https://github.com/user-attachments/assets/8b906c67-d621-45ac-bd72-bcef3ca162bb" />
 
 ---
 
